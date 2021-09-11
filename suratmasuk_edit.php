@@ -39,12 +39,21 @@ while ($user_data = mysqli_fetch_array($result)) {
 
         * {
             box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            line-height: 1em;
+            text-align: center;
+            color: #005075;
         }
 
         .button {
             display: inline-block;
             padding: 5px 15px;
-            font-size: 1vw;
+            font-size: 1.5vw;
             cursor: pointer;
             text-align: center;
             outline: none;
@@ -53,8 +62,6 @@ while ($user_data = mysqli_fetch_array($result)) {
             border: none;
             border-radius: 15px;
             box-shadow: 0 3px #999;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .button a {
@@ -103,11 +110,13 @@ while ($user_data = mysqli_fetch_array($result)) {
 
         .container {
             border-radius: 5px;
-            background-color: #f2f2f2;
+            background-color: #1f2739;
+            color: white;
             padding: 20px;
-            width: 80%;
+            width: 70%;
             margin-left: auto;
             margin-right: auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
 
         .col-25 {
@@ -143,9 +152,12 @@ while ($user_data = mysqli_fetch_array($result)) {
 </head>
 
 <body>
-    <div class="button">
-        <a href="halaman_admin_suratmasuk.php">Home</a>
-    </div>
+    <h1>Edit Surat Masuk</h1>
+    <br>
+    <center>
+        <div class="button"><i class="bx bx-home"></i> <a href="halaman_admin_suratmasuk.php">Home</a></div>
+    </center>
+    <br>
 
     <div class="container">
         <form name="update_user" method="post" action="suratmasuk_edit.php">

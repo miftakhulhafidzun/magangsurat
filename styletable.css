@@ -12,7 +12,7 @@ body {
 .button {
   display: inline-block;
   padding: 5px 15px;
-  font-size: 1vw;
+  font-size: 1.5vw;
   cursor: pointer;
   text-align: center;
   outline: none;
