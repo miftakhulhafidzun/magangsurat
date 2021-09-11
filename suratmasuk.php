@@ -43,7 +43,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
             echo "<td>" . $user_data['pengirim'] . "</td>";
             echo "<td>" . $user_data['nomor_surat'] . "</td>";
             echo "<td>" . $user_data['perihal'] . "</td>";
-            echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'>Edit</a> | <a href='delete.php?id=$user_data[id]'>Delete</a></td></tr><tbody/>";
+            echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'>Edit</a> | <a href='suratmasuk_delete.php?id=$user_data[id]'>Delete</a></td></tr><tbody/>";
         }
         ?>
     </table>

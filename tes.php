@@ -1,48 +1,26 @@
-<?php
-// include database connection file
-include_once("koneksi.php");
-
-// Check if form is submitted for user update, then redirect to homepage after update
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-
-    $pengirim = $_POST['pengirim'];
-    $perihal = $_POST['perihal'];
-    $nomor_surat = $_POST['nomor_surat'];
-
-    // update user data
-    $result = mysqli_query($mysqli, "UPDATE suratmasuk SET pengirim='$pengirim',nomor_surat='$nomor_surat',perihal='$perihal' WHERE id=$id");
-
-    // Redirect to homepage to display updated user in list
-    header("Location: halaman_admin_suratmasuk.php");
-}
-?>
-<?php
-// Display selected user data based on id
-// Getting id from url
-$id = $_GET['id'];
-
-// Fetech user data based on id
-$result = mysqli_query($mysqli, "SELECT * FROM suratmasuk WHERE id=$id");
-
-while ($user_data = mysqli_fetch_array($result)) {
-    $pengirim = $user_data['pengirim'];
-    $nomor_surat = $user_data['nomor_surat'];
-    $perihal = $user_data['perihal'];
-}
-?>
 <html>
 
 <head>
     <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
         * {
             box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            line-height: 1em;
+            text-align: center;
+            color: #005075;
         }
 
         .button {
             display: inline-block;
             padding: 5px 15px;
-            font-size: 1vw;
+            font-size: 1.5vw;
             cursor: pointer;
             text-align: center;
             outline: none;
@@ -99,8 +77,13 @@ while ($user_data = mysqli_fetch_array($result)) {
 
         .container {
             border-radius: 5px;
-            background-color: #f2f2f2;
+            background-color: #1f2739;
+            color: white;
             padding: 20px;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
 
         .col-25 {
@@ -136,17 +119,21 @@ while ($user_data = mysqli_fetch_array($result)) {
 </head>
 
 <body>
-
-    <a href="halaman_admin_suratmasuk.php">Home</a>
+    <h1>Tambahkan Surat Masuk</h1>
+    <br>
+    <center>
+        <div class="button"><i class="bx bx-home"></i> <a href="halaman_admin_suratmasuk.php">Home</a></div>
+    </center>
+    <br>
 
     <div class="container">
-        <form name="update_user" method="post" action="suratmasuk_edit.php">
+        <form action="halaman_admin_suratmasuk_add.php" method="post" name="form1">
             <div class="row">
                 <div class="col-25">
                     <label for="pengirim">Pengirim</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="pengirim" value=<?php echo $pengirim; ?>>
+                    <input type="text" name="pengirim">
                 </div>
             </div>
             <div class="row">
@@ -154,7 +141,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <label for="nomor_surat">Nomor Surat</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="nomor_surat" value=<?php echo $nomor_surat; ?>>
+                    <input type="text" name="nomor_surat">
                 </div>
             </div>
             <div class="row">
@@ -162,16 +149,33 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <label for="perihal">Perihal</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="perihal" value=<?php echo $perihal; ?>>
+                    <input type="text" name="perihal">
                 </div>
             </div>
+            <br>
             <div class="row">
-                <input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
-                <input type="submit" name="update" value="Update">
+                <input type="submit" name="Submit" value="Add">
             </div>
         </form>
     </div>
 
+    <?php
+    // Check If form submitted, insert form data into users table.
+    if (isset($_POST['Submit'])) {
+        $pengirim = $_POST['pengirim'];
+        $nomor_surat = $_POST['nomor_surat'];
+        $perihal = $_POST['perihal'];
+
+        // include database connection file
+        include_once("koneksi.php");
+
+        // Insert user data into table
+        $result = mysqli_query($mysqli, "INSERT INTO suratmasuk(pengirim,nomor_surat,perihal) VALUES('$pengirim','$nomor_surat','$perihal')");
+
+        // Show message when user added
+        echo "Data Berhasil Ditambahkan. <a href='halaman_admin_suratmasuk.php'>Lihat Semua Data</a>";
+    }
+    ?>
 </body>
 
 </html>
