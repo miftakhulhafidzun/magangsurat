@@ -31,7 +31,7 @@ $row2 = mysqli_fetch_array($result2);
     ?>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bx-book-bookmark'></i>
+            <i class='bx bx-envelope'></i>
             <span class="logo_name">Arsip Surat</span>
         </div>
         <ul class="nav-links">
@@ -44,13 +44,13 @@ $row2 = mysqli_fetch_array($result2);
             </li>
             <li>
                 <a href="halaman_admin_suratmasuk.php" class="">
-                    <i class='bx bx-box'></i>
+                    <i class='bx bx-archive-in'></i>
                     <span class="links_name">Surat Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-box'></i>
+                    <i class='bx bx-paper-plane'></i>
                     <span class="links_name">Surat Keluar</span>
                 </a>
             </li>
@@ -91,7 +91,7 @@ $row2 = mysqli_fetch_array($result2);
                 </div>
                 <div class="box" style="gap: 1em">
                     <h2>
-                        <span class="iconify" data-icon="bx:bx-archive-out" data-width="50" data-height="50"></span>
+                        <span class="iconify" data-icon="bx:bx-paper-plane" data-width="50" data-height="50"></span>
                         <?php
                         echo "<p style='font-weight: normal; font-size: 50px;'>" . $row2['totalsuratkeluar'] . "</p>";
                         ?>

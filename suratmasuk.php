@@ -13,7 +13,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
 </head>
 
 <body>
-    <h1>Surat Masuk</h1>
+    <h1>Arsip Surat Masuk</h1>
     <br>
     <center>
         <div class="button"><a href="halaman_admin_suratmasuk_add.php">+ Tambahkan Surat Masuk</a></div>
