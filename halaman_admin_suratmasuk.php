@@ -27,12 +27,13 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="halaman_admin.php" class="">
+                <a href="halaman_admin.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
             </li>
             <li>
+                <!-- SET ACTIVE UNTUK KETERANGAN SEDANG ADA PADA BAGIAN SURAT MASUK -->
                 <a href="#" class="active">>
                     <i class='bx bx-box'></i>
                     <span class="links_name">Surat Masuk</span>
@@ -68,11 +69,13 @@
             </div>
         </nav>
 
+        <!-- BAGIAN CONTENT -->
         <div class="home-content">
             <?php
             require 'suratmasuk.php';
             ?>
         </div>
+
     </section>
 
     <script>
