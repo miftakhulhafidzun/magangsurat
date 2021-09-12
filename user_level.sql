@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Sep 2021 pada 07.29
+-- Waktu pembuatan: 12 Sep 2021 pada 14.46
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 7.3.30
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `user_level`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `suratkeluar`
+--
+
+CREATE TABLE `suratkeluar` (
+  `id` int(11) NOT NULL,
+  `nomor_surat` varchar(100) NOT NULL,
+  `tanggal_keluar` date NOT NULL,
+  `kepada` varchar(255) NOT NULL,
+  `perihal` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `suratkeluar`
+--
+
+INSERT INTO `suratkeluar` (`id`, `nomor_surat`, `tanggal_keluar`, `kepada`, `perihal`) VALUES
+(1, '123123123', '2021-09-11', 'Pak Kades', 'pentinglah wes');
 
 -- --------------------------------------------------------
 
@@ -44,7 +65,12 @@ INSERT INTO `suratmasuk` (`id`, `pengirim`, `nomor_surat`, `perihal`) VALUES
 (3, 'nyobak', '9999', 'Ndablek areknya'),
 (4, 'tes', '1111', 'tess'),
 (5, 'bismillah', '33333', 'aman'),
-(6, 'bismillah', '2223', 'aman');
+(7, 'kedinasan', '123123123', 'pentinglah wes'),
+(8, 'UMM', '12.12.12.12', 'magang'),
+(9, 'Ibuk', '1111111111', 'kongkon muleh'),
+(16, 'Bapak', '9999999', 'kirim pulsa'),
+(21, 'Mbak', '000000', 'blonjo sayur'),
+(23, 'coba coba', '12.010/DP-KM/IX/2019', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto labore voluptates, consectetur libero, exercitationem atque nulla dolores voluptas, fuga ab quis dolorum. Accusantium sequi perspiciatis fugit rerum, veritatis voluptate iure obcaecati c');
 
 -- --------------------------------------------------------
 
@@ -73,6 +99,12 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`) VALUES
 --
 
 --
+-- Indeks untuk tabel `suratkeluar`
+--
+ALTER TABLE `suratkeluar`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `suratmasuk`
 --
 ALTER TABLE `suratmasuk`
@@ -89,10 +121,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `suratkeluar`
+--
+ALTER TABLE `suratkeluar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT untuk tabel `suratmasuk`
 --
 ALTER TABLE `suratmasuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
