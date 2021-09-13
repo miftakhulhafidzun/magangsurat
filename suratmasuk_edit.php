@@ -14,7 +14,7 @@ if (isset($_POST['update'])) {
     $result = mysqli_query($mysqli, "UPDATE suratmasuk SET pengirim='$pengirim',nomor_surat='$nomor_surat',perihal='$perihal' WHERE id=$id");
 
     // Redirect to homepage to display updated user in list
-    header("Location: halaman_admin_suratmasuk.php");
+    header("Location: admin/halaman_admin_suratmasuk.php");
 }
 ?>
 <?php
@@ -155,12 +155,12 @@ while ($user_data = mysqli_fetch_array($result)) {
     <h1>Edit Surat Masuk</h1>
     <br>
     <center>
-        <div class="button"><i class="bx bx-home"></i> <a href="halaman_admin_suratmasuk.php">Home</a></div>
+        <div class="button"><i class="bx bx-home"></i> <a href="admin/halaman_admin_suratmasuk.php">Home</a></div>
     </center>
     <br>
 
     <div class="container">
-        <form name="update_user" method="post" action="suratmasuk_edit.php">
+        <form name="update_user" method="post" action="../suratmasuk_edit.php">
             <div class="row">
                 <div class="col-25">
                     <label for="pengirim">Pengirim</label>

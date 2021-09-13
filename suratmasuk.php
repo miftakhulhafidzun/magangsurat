@@ -207,7 +207,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
             echo "<td>" . $user_data['pengirim'] . "</td>";
             echo "<td>" . $user_data['nomor_surat'] . "</td>";
             echo "<td>" . $user_data['perihal'] . "</td>";
-            echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a></td></tr><tbody/>";
+            echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a></td></tr><tbody/>";
             ++$number;
         }
         ?>

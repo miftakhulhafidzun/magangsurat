@@ -9,4 +9,4 @@ $id = $_GET['id'];
 $result = mysqli_query($mysqli, "DELETE FROM suratmasuk WHERE id=$id");
 
 // After delete redirect to Home, so that latest user list will be displayed.
-header("Location:halaman_admin_suratmasuk.php");
+header("Location:admin/halaman_admin_suratmasuk.php");

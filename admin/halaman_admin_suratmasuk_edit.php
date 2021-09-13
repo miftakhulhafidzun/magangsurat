@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
-    <link rel="stylesheet" href="styleadmin.css">
+    <link rel="stylesheet" href="../styleadmin.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +71,7 @@
 
         <div class="home-content">
             <?php
-            require 'suratmasuk_edit.php';
+            require '../suratmasuk_edit.php';
             ?>
         </div>
     </section>
