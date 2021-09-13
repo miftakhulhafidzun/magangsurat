@@ -10,6 +10,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
 
 <head>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='styletable.css'> -->
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/dataTables/datatables.min.css'>
     <style>
         @charset "UTF-8";
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
@@ -178,7 +179,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
         <div class="button"><a href="halaman_admin_suratmasuk_add.php">+ Tambahkan Surat Masuk</a></div>
     </center>
     <br>
-    <table style="width: 95% !important;" class="container">
+    <table style="width: 95% !important;" class="container" id="datatable">
         <thead>
             <tr>
                 <th>
@@ -198,20 +199,27 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
                 </th>
             </tr>
         </thead>
-        <?php
-        $number = 1;
-        while ($user_data = mysqli_fetch_array($result)) {
-            echo "<tbody>";
-            echo "<tr>";
-            echo "<td> $number </td>";
-            echo "<td>" . $user_data['pengirim'] . "</td>";
-            echo "<td>" . $user_data['nomor_surat'] . "</td>";
-            echo "<td>" . $user_data['perihal'] . "</td>";
-            echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a></td></tr><tbody/>";
-            ++$number;
-        }
-        ?>
+        <tbody>
+            <?php
+            $number = 1;
+            while ($user_data = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td> $number </td>";
+                echo "<td>" . $user_data['pengirim'] . "</td>";
+                echo "<td>" . $user_data['nomor_surat'] . "</td>";
+                echo "<td>" . $user_data['perihal'] . "</td>";
+                echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a></td></tr>";
+                ++$number;
+            }
+            ?>
+        </tbody>
     </table>
+    <script src="assets/dataTables/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+    </script>
 </body>
 
 </html>
