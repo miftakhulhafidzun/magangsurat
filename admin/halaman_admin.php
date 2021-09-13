@@ -55,7 +55,7 @@ $row2 = mysqli_fetch_array($result2);
                 </a>
             </li>
             <li class="log_out">
-                <a href="logout.php">
+                <a href="../logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
