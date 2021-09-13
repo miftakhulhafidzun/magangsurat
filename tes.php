@@ -9,31 +9,166 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='styletable.css'> -->
+    <style>
+        @charset "UTF-8";
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
-    <title>Arsip Surat Kota Samarinda </title>
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-weight: 300;
+            line-height: 1.42em;
+            color: #a7a1ae;
+            background-color: #1f2739;
+        }
 
-    <!-- Bootstrap -->
-    <link href="../assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../assets/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="../assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="../img/icon.ico">
-    <!-- Custom Theme Style -->
-    <link href="../assets/build/css/custom.min.css" rel="stylesheet">
+        .button {
+            display: inline-block;
+            padding: 5px 15px;
+            font-size: 1.5vw;
+            cursor: pointer;
+            text-align: center;
+            outline: none;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 3px #999;
+        }
+
+        .button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .button:hover {
+            background-color: #3e8e41;
+        }
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 3px #666;
+            transform: translateY(2px);
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            line-height: 1em;
+            text-align: center;
+            color: #005075;
+        }
+
+        h2 {
+            font-size: 1em;
+            font-weight: 300;
+            text-align: center;
+            display: block;
+            line-height: 1em;
+            padding-bottom: 2em;
+            color: #fb667a;
+        }
+
+        h2 a {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fb667a;
+            text-decoration: none;
+        }
+
+        .blue {
+            color: #185875;
+        }
+
+        .yellow {
+            color: #fff842;
+        }
+
+        .container th h1 {
+            font-weight: normal;
+            font-size: 1em;
+            text-align: left;
+            color: #ffffff;
+            padding: 0;
+        }
+
+        .container td {
+            font-weight: normal;
+            font-size: 1em;
+            -webkit-box-shadow: 0 2px 2px -2px #0e1119;
+            -moz-box-shadow: 0 2px 2px -2px #0e1119;
+            box-shadow: 0 2px 2px -2px #0e1119;
+        }
+
+        .container {
+            text-align: left;
+            overflow: hidden;
+            width: 100% !important;
+            margin: 0 auto;
+            display: table;
+            padding: 0;
+        }
+
+        /* Background-color of the odd rows */
+        .container tr:nth-child(odd) {
+            background-color: #323c50;
+        }
+
+        /* Background-color of the even rows */
+        .container tr:nth-child(even) {
+            background-color: #2c3446;
+        }
+
+        .container td,
+        .container th {
+            padding-bottom: 1%;
+            padding-top: 1%;
+            padding-left: 1%;
+        }
+
+        .container th {
+            background-color: #1f2739;
+        }
+
+        .container td:first-child {
+            color: #fb667a;
+        }
+
+        .container td a {
+            text-decoration: none;
+            color: rgb(255, 0, 191);
+        }
+
+        .container tr:hover {
+            background-color: #464a52;
+            -webkit-box-shadow: 0 6px 6px -6px #0e1119;
+            -moz-box-shadow: 0 6px 6px -6px #0e1119;
+            box-shadow: 0 6px 6px -6px #0e1119;
+        }
+
+        .container td:hover {
+            background-color: #fff842;
+            color: #403e10;
+            font-weight: bold;
+
+            box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
+                #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
+            transform: translate3d(6px, -6px, 0);
+
+            transition-delay: 0s;
+            transition-duration: 0.4s;
+            transition-property: all;
+            transition-timing-function: line;
+        }
+
+        @media (max-width: 800px) {
+
+            .container td:nth-child(4),
+            .container th:nth-child(4) {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
