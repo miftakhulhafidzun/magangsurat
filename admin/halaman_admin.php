@@ -66,7 +66,7 @@ $row2 = mysqli_fetch_array($result2);
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Surat Masuk</span>
+                <span class="dashboard">Dashboard</span>
             </div>
             <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">

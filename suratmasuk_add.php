@@ -139,13 +139,21 @@
     <br>
 
     <div class="container">
-        <form action="halaman_admin_suratmasuk_add.php" method="post" name="form1">
+        <form action="halaman_admin_suratmasuk_add.php" method="post" name="form1" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-25">
                     <label for="pengirim">Pengirim</label>
                 </div>
                 <div class="col-75">
                     <input type="text" name="pengirim">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="pengirim">Tanggal Masuk</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="tanggal_masuk" class="form-control" id="date" value="<?php echo date("d-m-Y"); ?>">
                 </div>
             </div>
             <div class="row">
@@ -164,6 +172,14 @@
                     <input type="text" name="perihal">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="file_suratmasuk"></label>
+                </div>
+                <div class="col-75">
+                    <td><input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" class="form-control-file" autocomplete="off" /></td>
+                </div>
+            </div>
             <br>
             <div class="row">
                 <input type="submit" name="Submit" value="Add">
@@ -175,18 +191,36 @@
     // Check If form submitted, insert form data into users table.
     if (isset($_POST['Submit'])) {
         $pengirim = $_POST['pengirim'];
+        $tanggal_masuk = $_POST['tanggal_masuk'];
         $nomor_surat = $_POST['nomor_surat'];
         $perihal = $_POST['perihal'];
 
         // include database connection file
         include_once("koneksi.php");
 
-        // Insert user data into table
-        $result = mysqli_query($mysqli, "INSERT INTO suratmasuk(pengirim,nomor_surat,perihal) VALUES('$pengirim','$nomor_surat','$perihal')");
+        $tgl_masuk = date('Y-m-d H:i:s', strtotime($tanggal_masuk));
 
-        // Show message when user added
-        echo "<br>";
-        echo "<p align=center>Data Berhasil Ditambahkan. <a href='halaman_admin_suratmasuk.php'>Lihat Semua Data</a></p>";
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal_entry  = date("YmdHis");
+
+        $nama_file_lengkap = $_FILES['file_suratmasuk']['name'];
+        $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
+        $ext_file          = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
+        $tipe_file         = $_FILES['file_suratmasuk']['type'];
+        $ukuran_file       = $_FILES['file_suratmasuk']['size'];
+        $tmp_file          = $_FILES['file_suratmasuk']['tmp_name'];
+
+        if (!($pengirim == '') and !($nomor_surat == '') and !($perihal == '') and ($tipe_file == "application/pdf") and ($ukuran_file <= 10340000)) {
+            $nama_baru = 'suratmasuk-' . $tanggal_entry . $ext_file;
+            $path = "../pdfsuratmasuk/" . $nama_baru;
+            move_uploaded_file($tmp_file, $path);
+
+            $sql = "INSERT INTO suratmasuk (pengirim, tanggal_masuk, nomor_surat, perihal, file_suratmasuk)
+                    values ('$pengirim','$tgl_masuk','$nomor_surat','$perihal','$nama_baru')";
+            $execute = mysqli_query($mysqli, $sql);
+
+            echo "<center>User added successfully. <a href='halaman_admin_suratmasuk.php' class= 'btn btn-primary'>Lihat data</a></center>";
+        }
     }
     ?>
 </body>

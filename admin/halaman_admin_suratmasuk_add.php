@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="active">>
+                <a href="halaman_admin_suratmasuk.php" class="active">>
                     <i class='bx bx-box'></i>
                     <span class="links_name">Surat Masuk</span>
                 </a>
