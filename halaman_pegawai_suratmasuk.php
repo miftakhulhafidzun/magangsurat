@@ -1,14 +1,5 @@
-<?php
-include_once("koneksi.php");
-
-$result1 = mysqli_query($mysqli, "SELECT count(*) as totalsuratmasuk from suratmasuk;");
-$row1 = mysqli_fetch_array($result1);
-
-// $result2 = mysqli_query($mysqli, "SELECT count(*) as totalsuratkeluar from suratkeluar;");
-// $row2 = mysqli_fetch_array($result2);
-// ?>
-
-
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
 <html lang="en" dir="ltr">
 
 <head>
@@ -18,6 +9,12 @@ $row1 = mysqli_fetch_array($result1);
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <style>
+        .home-section .home-content {
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+    </style> -->
 </head>
 
 <body>
@@ -31,26 +28,26 @@ $row1 = mysqli_fetch_array($result1);
     ?>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bx-envelope'></i>
+            <i class='bx bx-book-bookmark'></i>
             <span class="logo_name">Arsip Surat</span>
         </div>
         <ul class="nav-links">
             <li>
-                <!-- SET ACTIVE UNTUK SECTION YANG ACTIVE -->
-                <a href="#" class="active">
+                <a href="halaman_pegawai.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="halaman_pegawai_suratmasuk.php" class="">
-                    <i class='bx bx-archive-in'></i>
+                <!-- SET ACTIVE UNTUK KETERANGAN SEDANG ADA PADA BAGIAN SURAT MASUK -->
+                <a href="#" class="active">>
+                    <i class='bx bx-box'></i>
                     <span class="links_name">Surat Masuk</span>
                 </a>
             </li>
             <!-- <li>
                 <a href="#">
-                    <i class='bx bx-paper-plane'></i>
+                    <i class='bx bx-box'></i>
                     <span class="links_name">Surat Keluar</span>
                 </a>
             </li> -->
@@ -66,7 +63,7 @@ $row1 = mysqli_fetch_array($result1);
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Dashboard</span>
+                <span class="dashboard">Surat Masuk</span>
             </div>
             <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
@@ -78,28 +75,13 @@ $row1 = mysqli_fetch_array($result1);
             </div>
         </nav>
 
+        <!-- BAGIAN CONTENT -->
         <div class="home-content">
-            <div class="overview-boxes">
-                <div class="box" style="gap: 1em">
-                    <h2>
-                        <span class="iconify" data-icon="bx:bx-archive-in" data-width="50" data-height="50"></span>
-                        <?php
-                        echo "<p style='font-weight: normal; font-size: 50px;'>" . $row1['totalsuratmasuk'] . "</p>";
-                        ?>
-                    </h2>
-                    <h1 style='font-weight: normal; font-size: 50px; color: #0a2558;'>Surat Masuk</h1>
-                </div>
-                <!-- <div class="box" style="gap: 1em"> -->
-                    <!-- <h2>
-                        <span class="iconify" data-icon="bx:bx-paper-plane" data-width="50" data-height="50"></span>
-                        <?php
-                        echo "<p style='font-weight: normal; font-size: 50px;'>" . $row2['totalsuratkeluar'] . "</p>";
-                        ?> -->
-                    </h2>
-                    <!-- <h1 style='font-weight: normal; font-size: 50px; color: #0a2558;'>Surat Keluar</h1> 
-                </div>
-            </div>
+            <?php
+            require 'suratmasuk_pegawai.php';
+            ?>
         </div>
+
     </section>
 
     <script>
@@ -113,7 +95,6 @@ $row1 = mysqli_fetch_array($result1);
                 sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
     </script>
-    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
 
 </body>
 

@@ -3,7 +3,8 @@
 include_once("koneksi.php");
 
 // Fetch all users data from database
-$result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
+$unit = $_SESSION['unit'];
+$result = mysqli_query($mysqli, "SELECT * FROM suratmasuk where find_in_set($unit,unit) ORDER BY id DESC");
 ?>
 
 <html>
@@ -47,15 +48,14 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
 </head>
 
 <body>
-    <center>
+    <!-- <center>
         <div><a href="halaman_admin_suratmasuk_add.php" class="btn btn-primary">+ Tambahkan Surat Masuk</a></div>
-    </center>
+    </center> -->
     <table style="width: 97%;" class="container table-striped table-bordered table-hover" id="datatable">
         <thead>
             <tr>
                 <th>No</th>
                 <th>Pengirim</th>
-                <!-- <th>Tujuan</th> -->
                 <th>Tanggal Masuk</th>
                 <th>Nomor Surat</th>
                 <th>Perihal</th>
@@ -70,12 +70,11 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
                 echo "<tr>";
                 echo "<td> $number </td>";
                 echo "<td>" . $user_data['pengirim'] . "</td>";
-                // echo "<td>" . $user_data['tujuan'] . "</td>";
                 echo "<td>" . $user_data['tanggal_masuk'] . "</td>";
                 echo "<td>" . $user_data['nomor_surat'] . "</td>";
                 echo "<td>" . $user_data['perihal'] . "</td>";
                 echo "<td>" . $user_data['file_suratmasuk'] . "</td>";
-                echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a> | <a href='../pdfsuratmasuk/$user_data[file_suratmasuk]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
+                echo "<td><a href='pdfsuratmasuk/$user_data[file_suratmasuk]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
                 ++$number;
             }
             ?>

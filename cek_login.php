@@ -34,6 +34,7 @@ if ($cek > 0) {
         // buat session login dan username
         $_SESSION['username'] = $username;
         $_SESSION['level'] = "pegawai";
+        $_SESSION['unit'] = $data['id_unit'];
         // alihkan ke halaman dashboard pegawai
         header("location:halaman_pegawai.php");
     } else {
