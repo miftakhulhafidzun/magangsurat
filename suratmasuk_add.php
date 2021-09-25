@@ -1,12 +1,42 @@
 <html>
 
 <head>
-    <style>
+    <title>Arsip Surat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Plugin jQuery dan CSS: -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example-optionClass').multiselect({
+                includeSelectAllOption: true, // add select all option as usual
+                optionClass: function(element) {
+                    var value = $(element).val();
+
+                    if (value % 2 == 0) {
+                        return 'even';
+                    } else {
+                        return 'odd';
+                    }
+                }
+            });
+        });
+    </script>
+    <style type="text/css">
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
         * {
             box-sizing: border-box;
             font-family: "Open Sans", sans-serif;
+        }
+
+        #example-optionClass-container .multiselect-container li.odd {
+            background: #eeeeee;
         }
 
         h1 {
@@ -174,6 +204,23 @@
             </div>
             <div class="row">
                 <div class="col-25">
+                    <label for="unit">Unit</label>
+                </div>
+                <div class="col-75">
+                    <div id="example-optionClass-container">
+                        <select name="unit[]" id="example-optionClass" multiple="multiple">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
                     <label for="file_suratmasuk"></label>
                 </div>
                 <div class="col-75">
@@ -194,6 +241,7 @@
         $tanggal_masuk = $_POST['tanggal_masuk'];
         $nomor_surat = $_POST['nomor_surat'];
         $perihal = $_POST['perihal'];
+        $unit = implode(',', $_POST['unit']);
 
         // include database connection file
         include_once("koneksi.php");
@@ -215,14 +263,17 @@
             $path = "../pdfsuratmasuk/" . $nama_baru;
             move_uploaded_file($tmp_file, $path);
 
-            $sql = "INSERT INTO suratmasuk (pengirim, tanggal_masuk, nomor_surat, perihal, file_suratmasuk)
-                    values ('$pengirim','$tgl_masuk','$nomor_surat','$perihal','$nama_baru')";
+            $sql = "INSERT INTO suratmasuk (pengirim, tanggal_masuk, nomor_surat, perihal,unit, file_suratmasuk)
+                    values ('$pengirim','$tgl_masuk','$nomor_surat','$perihal','$unit','$nama_baru')";
             $execute = mysqli_query($mysqli, $sql);
 
             echo "<center>User added successfully. <a href='halaman_admin_suratmasuk.php' class= 'btn btn-primary'>Lihat data</a></center>";
         }
     }
     ?>
+    <script type="text/javascript">
+        $('#example-multiple-selected').multiselect();
+    </script>
 </body>
 
 </html>

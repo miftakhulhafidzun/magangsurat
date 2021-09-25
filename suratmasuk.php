@@ -55,10 +55,10 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
             <tr>
                 <th>No</th>
                 <th>Pengirim</th>
-                <!-- <th>Tujuan</th> -->
                 <th>Tanggal Masuk</th>
                 <th>Nomor Surat</th>
                 <th>Perihal</th>
+                <th>Unit</th>
                 <th>File</th>
                 <th>Action</th>
             </tr>
@@ -70,10 +70,10 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
                 echo "<tr>";
                 echo "<td> $number </td>";
                 echo "<td>" . $user_data['pengirim'] . "</td>";
-                // echo "<td>" . $user_data['tujuan'] . "</td>";
                 echo "<td>" . $user_data['tanggal_masuk'] . "</td>";
                 echo "<td>" . $user_data['nomor_surat'] . "</td>";
                 echo "<td>" . $user_data['perihal'] . "</td>";
+                echo "<td>" . $user_data['unit'] . "</td>";
                 echo "<td>" . $user_data['file_suratmasuk'] . "</td>";
                 echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a> | <a href='../pdfsuratmasuk/$user_data[file_suratmasuk]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
                 ++$number;
