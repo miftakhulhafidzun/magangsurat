@@ -1,36 +1,101 @@
 <?php
-// include database connection file
-include_once("koneksi.php");
+include 'koneksi.php';
+if (isset($_GET['id'])) {
+    if ($_GET['id'] != "") {
 
-// Check if form is submitted for user update, then redirect to homepage after update
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
+        $id = $_GET['id'];
 
-    $pengirim = $_POST['pengirim'];
-    $perihal = $_POST['perihal'];
-    $nomor_surat = $_POST['nomor_surat'];
+        $query = mysqli_query($mysqli, "SELECT * FROM suratmasuk WHERE id='$id'");
+        $row = mysqli_fetch_array($query);
+    } else {
+        header("location:halaman_admin_suratmasuk.php");
+    }
+}
 
-    // update user data
-    $result = mysqli_query($mysqli, "UPDATE suratmasuk SET pengirim='$pengirim',nomor_surat='$nomor_surat',perihal='$perihal' WHERE id=$id");
+// Mengecek apakah ID ada datanya atau tidak
+if (isset($_POST['id'])) {
+    if ($_POST['id'] != "") {
+        // Mengambil data dari form lalu ditampung didalam variabel
+        $id = $_POST['id'];
+        $pengirim = $_POST['pengirim'];
+        $tanggal_masuk = $_POST['tanggal_masuk'];
+        $nomor_surat = $_POST['nomor_surat'];
+        $perihal = $_POST['perihal'];
 
-    // Redirect to homepage to display updated user in list
-    header("Location: admin/halaman_admin_suratmasuk.php");
+        $file_nama = $_FILES['file_suratmasuk']['name'];
+        $file_size = $_FILES['file_suratmasuk']['size'];
+    } else {
+        header("location:halaman_admin_suratmasuk.php");
+    }
+
+    // Mengecek apakah file lebih besar 2 MB atau tidak
+    if ($file_size > 2097152) {
+        // Jika File lebih dari 2 MB maka akan gagal mengupload File
+        header("location:halaman_admin_suratmasuk.php?pesan=size");
+    } else {
+
+        // Mengecek apakah Ada file yang diupload atau tidak
+        if ($file_nama != "") {
+
+            // Ekstensi yang diperbolehkan untuk diupload boleh diubah sesuai keinginan
+            $ekstensi_izin = array('pdf');
+            // Memisahkan nama file dengan Ekstensinya
+            $pisahkan_ekstensi = explode('.', $file_nama);
+            $ekstensi = strtolower(end($pisahkan_ekstensi));
+            // Nama file yang berada di dalam direktori temporer server
+            $file_tmp = $_FILES['file_suratmasuk']['tmp_name'];
+            // Membuat angka/huruf acak berdasarkan waktu diupload
+            $tanggal = md5(date('Y-m-d h:i:s'));
+            // Menyatukan angka/huruf acak dengan nama file aslinya
+            $file_nama_new = $tanggal . '-' . $file_nama;
+
+            // Mengecek apakah Ekstensi file sesuai dengan Ekstensi file yg diuplaod
+            if (in_array($ekstensi, $ekstensi_izin) === true) {
+
+                // Mengambil data siswa_foto didalam table siswa
+                $get_file = "SELECT file_suratmasuk FROM suratmasuk WHERE id='$id'";
+                $data_file = mysqli_query($koneksi, $get_file);
+                // Mengubah data yang diambil menjadi Array
+                $file_lama = mysqli_fetch_array($data_file);
+
+                // Menghapus Foto lama didalam folder FOTO
+                unlink("pdfsuratmasuk/" . $file_lama['file_suratmasuk']);
+
+                // Memindahkan File kedalam Folder "FOTO"
+                move_uploaded_file($file_tmp, 'foto/' . $file_nama_new);
+
+                // Query untuk memasukan data kedalam table SISWA
+                $query = mysqli_query($mysqli, "UPDATE suratmasuk SET perihal='$perihal', tanggal_surat='$tanggal_surat', nomor_surat='$nomor_surat', perihal='$perihal', file_suratmasuk='$file_nama_new' WHERE id_siswa='$id'");
+
+                // Mengecek apakah data gagal diinput atau tidak
+                if ($query) {
+                    header("location:halaman_admin_suratmasuk.php?pesan=berhasil");
+                } else {
+                    header("location:halaman_admin_suratmasuk.php?pesan=gagal");
+                }
+            } else {
+                // Jika ekstensinya tidak sesuai dengan apa yg kita tetapkan maka error
+                header("location:halaman_admin_suratmasuk.php?pesan=ekstensi");
+            }
+        } else {
+
+            // Apabila tidak ada file yang diupload maka akan menjalankan code dibawah ini
+            $query = mysqli_query($mysqli, "UPDATE suratmasuk SET perihal='$perihal', tanggal_surat='$tanggal_surat', nomor_surat='$nomor_surat', perihal='$perihal', file_suratmasuk='$file_nama_new' WHERE id_siswa='$id'");
+
+            // Mengecek apakah data gagal diinput atau tidak
+            if ($query) {
+                header("location:halaman_admin_suratmasuk.php?pesan=berhasil");
+            } else {
+                header("location:halaman_admin_suratmasuk.php?pesan=gagal");
+            }
+        }
+    }
+} else {
+    // Apabila ID tidak ditemukan maka akan dikembalikan ke halaman index
+    header("location:halaman_admin_suratmasuk.php");
 }
 ?>
-<?php
-// Display selected user data based on id
-// Getting id from url
-$id = $_GET['id'];
 
-// Fetech user data based on id
-$result = mysqli_query($mysqli, "SELECT * FROM suratmasuk WHERE id=$id");
-
-while ($user_data = mysqli_fetch_array($result)) {
-    $pengirim = $user_data['pengirim'];
-    $nomor_surat = $user_data['nomor_surat'];
-    $perihal = $user_data['perihal'];
-}
-?>
 <html>
 
 <head>
@@ -160,13 +225,22 @@ while ($user_data = mysqli_fetch_array($result)) {
     <br>
 
     <div class="container">
-        <form name="update_user" method="post" action="suratmasuk_edit.php">
+        <form name="update_user" method="post" action="halaman_admin_suratmasuk_edit.php" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-25">
                     <label for="pengirim">Pengirim</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="pengirim" value=<?php echo $pengirim; ?>>
+                    <input type="text" name="pengirim" value=<?php echo $row['pengirim']; ?>>
+                    <input type="hidden" name="id" class="form-control" value="<?php echo $row['id']; ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="tanggal_masuk">Tanggal Masuk</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="tanggal_masuk" value=<?php echo $row['tanggal_masuk']; ?>>
                 </div>
             </div>
             <div class="row">
@@ -174,7 +248,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <label for="nomor_surat">Nomor Surat</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="nomor_surat" value=<?php echo $nomor_surat; ?>>
+                    <input type="text" name="nomor_surat" value=<?php echo $row['nomor_surat']; ?>>
                 </div>
             </div>
             <div class="row">
@@ -182,12 +256,19 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <label for="perihal">Perihal</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="perihal" value=<?php echo $perihal; ?>>
+                    <input type="text" name="perihal" value=<?php echo $row['perihal']; ?>>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="perihal"></label>
+                </div>
+                <div class="col-75">
+                    <input type="file" name="file_suratmasuk">
                 </div>
             </div>
             <br>
             <div class="row">
-                <input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
                 <input type="submit" name="update" value="Update">
             </div>
         </form>
