@@ -4,8 +4,18 @@
 <head>
     <title>Login Sistem</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            background-image: url("rs1.jpg");
+            background-size: cover;
+        }
 
-    
+        img {
+            width: 25%;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -24,7 +34,9 @@
     ?>
 
     <div class="kotak_login">
-        <p class="tulisan_login">Silahkan login</p>
+        <center>
+            <img src="logorsudntb.png" alt="logo">
+        </center>
 
         <form action="cek_login.php" method="post">
             <label>Username</label>
@@ -38,7 +50,7 @@
             <br />
             <br />
             <center>
-                <a class="link" href="https://www.malasngoding.com">Kembali Ke Beranda</a>
+                <a class="link" href="#"></a>
             </center>
         </form>
 

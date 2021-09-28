@@ -71,7 +71,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM suratkeluar ORDER BY id DESC");
                 echo "<td>" . $user_data['tanggal_keluar'] . "</td>";
                 echo "<td>" . $user_data['perihal'] . "</td>";
                 echo "<td>" . $user_data['file_suratkeluar'] . "</td>";
-                echo "<td><a href='halaman_admin_suratkeluar_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratkeluar_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a> | <a href='../pdfsuratkeluar/$user_data[file_suratkeluar]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
+                echo "<td><a href='../pdfsuratkeluar/$user_data[file_suratkeluar]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
                 ++$number;
             }
             ?>

@@ -84,7 +84,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             resize: vertical;
-            color:black;
+            color: black;
         }
 
         label {
@@ -210,12 +210,12 @@
                 <div class="col-75">
                     <div id="example-optionClass-container">
                         <select name="unit[]" id="example-optionClass" multiple="multiple">
-                            <option value="1">pegawai</option>
-                            <option value="2">irs</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
+                            <option value="1">Direktur</option>
+                            <option value="2">Umum</option>
+                            <option value="3">Pelayanan</option>
+                            <option value="4">SDM</option>
+                            <option value="5">Diklat</option>
+                            <option value="6">Keuangan</option>
                         </select>
                     </div>
                 </div>
