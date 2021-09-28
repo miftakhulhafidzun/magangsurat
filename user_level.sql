@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Sep 2021 pada 06.31
+-- Waktu pembuatan: 28 Sep 2021 pada 03.28
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -31,16 +31,16 @@ CREATE TABLE `suratkeluar` (
   `id` int(11) NOT NULL,
   `nomor_surat` varchar(100) NOT NULL,
   `tanggal_keluar` date NOT NULL,
-  `kepada` varchar(255) NOT NULL,
-  `perihal` varchar(255) NOT NULL
+  `perihal` varchar(255) NOT NULL,
+  `file_suratkeluar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `suratkeluar`
 --
 
-INSERT INTO `suratkeluar` (`id`, `nomor_surat`, `tanggal_keluar`, `kepada`, `perihal`) VALUES
-(1, '123123123', '2021-09-11', 'Pak Kades', 'pentinglah wes');
+INSERT INTO `suratkeluar` (`id`, `nomor_surat`, `tanggal_keluar`, `perihal`, `file_suratkeluar`) VALUES
+(3, '748892uujd9902', '2021-09-27', 'malger', 'suratkeluar-20210927111116.pdf');
 
 -- --------------------------------------------------------
 
@@ -63,9 +63,9 @@ CREATE TABLE `suratmasuk` (
 --
 
 INSERT INTO `suratmasuk` (`id`, `pengirim`, `tanggal_masuk`, `nomor_surat`, `perihal`, `unit`, `file_suratmasuk`) VALUES
-(39, 'Bapak', '2021-09-14', '1243', 'blonjo buah sayur', '1,2', 'suratmasuk-20210914110218.pdf'),
-(41, 'Gub', '2021-09-20', '123/kki.789ko/00', 'undangan', '2', 'suratmasuk-20210920122431.pdf'),
-(42, 'Diklat', '2021-09-21', '355r', 'lji', '3', 'suratmasuk-20210921123858.pdf');
+(47, 'vs', '2021-09-27', '342', 'malger', '1', 'suratmasuk-20210927101932.pdf'),
+(48, 'ujicoba', '2021-09-27', '889900okl90', 'klohi', '1,2', 'suratmasuk-20210927113308.pdf'),
+(49, 'pmencoba', '2021-09-27', '342', 'bismillah', '1,2', 'suratmasuk-20210927121316.pdf');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,12 @@ CREATE TABLE `unit` (
 --
 
 INSERT INTO `unit` (`id`, `nama`) VALUES
-(1, 'coba');
+(1, 'Direktur'),
+(2, 'Umum'),
+(3, 'Pelayanan'),
+(4, 'SDM'),
+(5, 'Diklat'),
+(6, 'Keuangan');
 
 -- --------------------------------------------------------
 
@@ -107,7 +112,11 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`, `id_unit`) VALUES
 (1, 'Hafidz', 'admin', 'admin', 'admin', 0),
 (2, 'Unyuk', 'pegawai', 'pegawai', 'pegawai', 1),
-(3, 'dino', 'irs', 'irs', 'pegawai', 2);
+(3, 'dino', 'umum', 'umum', 'pegawai', 2),
+(7, 'orang1', 'pelayanan', 'pelayanan', 'pegawai', 3),
+(8, 'orang2', 'sdm', 'sdm', 'pegawai', 4),
+(9, 'orang3', 'diklat', 'diklat', 'pegawai', 5),
+(10, 'orang4', 'keuangan', 'keuangan', 'pegawai', 6);
 
 --
 -- Indexes for dumped tables
@@ -145,25 +154,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `suratkeluar`
 --
 ALTER TABLE `suratkeluar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `suratmasuk`
 --
 ALTER TABLE `suratmasuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `unit`
 --
 ALTER TABLE `unit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
