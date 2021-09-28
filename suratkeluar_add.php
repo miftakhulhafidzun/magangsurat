@@ -162,37 +162,29 @@
 </head>
 
 <body>
-    <h1>Tambahkan Surat Masuk</h1>
+    <h1>Tambahkan Surat Keluar</h1>
     <br>
     <center>
-        <div class="button"><i class="bx bx-home"></i> <a href="halaman_admin_suratmasuk.php">Home</a></div>
+        <div class="button"><i class="bx bx-home"></i> <a href="halaman_admin_suratkeluar.php">Home</a></div>
     </center>
     <br>
 
     <div class="container">
-        <form action="halaman_admin_suratmasuk_add.php" method="post" name="form1" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-25">
-                    <label for="pengirim">Pengirim</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" name="pengirim">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="pengirim">Tanggal Masuk</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" name="tanggal_masuk" class="form-control" id="date" value="<?php echo date("d-m-Y"); ?>">
-                </div>
-            </div>
-            <div class="row">
+        <form action="halaman_admin_suratkeluar_add.php" method="post" enctype="multipart/form-data">
+        <div class="row">
                 <div class="col-25">
                     <label for="nomor_surat">Nomor Surat</label>
                 </div>
                 <div class="col-75">
                     <input type="text" name="nomor_surat">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="pengirim">Tanggal Keluar</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="tanggal_keluar" class="form-control" id="date" value="<?php echo date("d-m-Y"); ?>">
                 </div>
             </div>
             <div class="row">
@@ -205,27 +197,10 @@
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="unit">Unit</label>
+                    <label for="file_suratkeluar"></label>
                 </div>
                 <div class="col-75">
-                    <div id="example-optionClass-container">
-                        <select name="unit[]" id="example-optionClass" multiple="multiple">
-                            <option value="1">pegawai</option>
-                            <option value="2">irs</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="file_suratmasuk"></label>
-                </div>
-                <div class="col-75">
-                    <td><input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" class="form-control-file" autocomplete="off" /></td>
+                    <td><input name="file_suratkeluar" accept="application/pdf" type="file" id="file_suratkeluar" class="form-control-file" autocomplete="off" /></td>
                 </div>
             </div>
             <br>
@@ -238,43 +213,40 @@
     <?php
     // Check If form submitted, insert form data into users table.
     if (isset($_POST['Submit'])) {
-        $pengirim = $_POST['pengirim'];
-        $tanggal_masuk = $_POST['tanggal_masuk'];
         $nomor_surat = $_POST['nomor_surat'];
+        $tanggal_keluar = $_POST['tanggal_keluar'];
         $perihal = $_POST['perihal'];
-        $unit = implode(',', $_POST['unit']);
-
+        
+     
+    
         // include database connection file
         include_once("koneksi.php");
 
-        $tgl_masuk = date('Y-m-d H:i:s', strtotime($tanggal_masuk));
+        $tgl_keluar = date('Y-m-d H:i:s', strtotime($tanggal_keluar));
 
         date_default_timezone_set('Asia/Jakarta');
         $tanggal_entry  = date("YmdHis");
 
-        $nama_file_lengkap = $_FILES['file_suratmasuk']['name'];
+        $nama_file_lengkap = $_FILES['file_suratkeluar']['name'];
         $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
         $ext_file          = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-        $tipe_file         = $_FILES['file_suratmasuk']['type'];
-        $ukuran_file       = $_FILES['file_suratmasuk']['size'];
-        $tmp_file          = $_FILES['file_suratmasuk']['tmp_name'];
+        $tipe_file         = $_FILES['file_suratkeluar']['type'];
+        $ukuran_file       = $_FILES['file_suratkeluar']['size'];
+        $tmp_file          = $_FILES['file_suratkeluar']['tmp_name'];
 
-        if (!($pengirim == '') and !($nomor_surat == '') and !($perihal == '') and ($tipe_file == "application/pdf") and ($ukuran_file <= 10340000)) {
-            $nama_baru = 'suratmasuk-' . $tanggal_entry . $ext_file;
-            $path = "../pdfsuratmasuk/" . $nama_baru;
+        if (!($nomor_surat == '') and !($perihal == '') and ($tipe_file == "application/pdf") and ($ukuran_file <= 10340000)) {
+            $nama_baru = 'suratkeluar-' . $tanggal_entry . $ext_file;
+            $path = "../pdfsuratkeluar/" . $nama_baru;
             move_uploaded_file($tmp_file, $path);
 
-            $sql = "INSERT INTO suratmasuk (pengirim, tanggal_masuk, nomor_surat, perihal,unit, file_suratmasuk)
-                    values ('$pengirim','$tgl_masuk','$nomor_surat','$perihal','$unit','$nama_baru')";
+            $sql = "INSERT INTO suratkeluar (nomor_surat, tanggal_keluar, perihal,file_suratkeluar)
+                    values ('$nomor_surat','$tgl_keluar','$perihal','$nama_baru')";
             $execute = mysqli_query($mysqli, $sql);
 
-            echo "<center>User added successfully. <a href='halaman_admin_suratmasuk.php' class= 'btn btn-primary'>Lihat data</a></center>";
+            echo "<center>User added successfully. <a href='halaman_admin_suratkeluar.php' class= 'btn btn-primary'>Lihat data</a></center>";
         }
     }
     ?>
-    <script type="text/javascript">
-        $('#example-multiple-selected').multiselect();
-    </script>
 </body>
 
 </html>

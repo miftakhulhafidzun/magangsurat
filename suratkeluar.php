@@ -3,28 +3,7 @@
 include_once("koneksi.php");
 
 // Fetch all users data from database
-$result = mysqli_query($mysqli, "SELECT * FROM suratmasuk ORDER BY id DESC");
-$unitarr = mysqli_query($mysqli, "select * FROM unit");
-
-$arrayunit = array();
-while ($unitdata = mysqli_fetch_array($unitarr)){
-$arrayunit[$unitdata['id']]=$unitdata['nama'];
-}
-
-function convArr($arr,$idArr)
-{
-  $aId = explode(",", $idArr);
-  $res = array();
-  foreach ($aId as $key => $value) 
-  {
-    foreach ($arr as $id => $nama) 
-    {
-      if ($id==$value)
-        array_push($res, $nama);
-    }
-  }
-  return implode(",", $res);
-}
+$result = mysqli_query($mysqli, "SELECT * FROM suratkeluar ORDER BY id DESC");
 ?>
 
 <html>
@@ -69,17 +48,15 @@ function convArr($arr,$idArr)
 
 <body>
     <center>
-        <div><a href="halaman_admin_suratmasuk_add.php" class="btn btn-primary">+ Tambahkan Surat Masuk</a></div>
+        <div><a href="halaman_admin_suratkeluar_add.php" class="btn btn-primary">+ Tambahkan Surat keluar</a></div>
     </center>
     <table style="width: 97%;" class="container table-striped table-bordered table-hover" id="datatable">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Pengirim</th>
-                <th>Tanggal Masuk</th>
                 <th>Nomor Surat</th>
+                <th>Tanggal Keluar</th>
                 <th>Perihal</th>
-                <th>Unit</th>
                 <th>File</th>
                 <th>Action</th>
             </tr>
@@ -90,13 +67,11 @@ function convArr($arr,$idArr)
             while ($user_data = mysqli_fetch_array($result)) {
                 echo "<tr>";
                 echo "<td> $number </td>";
-                echo "<td>" . $user_data['pengirim'] . "</td>";
-                echo "<td>" . $user_data['tanggal_masuk'] . "</td>";
                 echo "<td>" . $user_data['nomor_surat'] . "</td>";
+                echo "<td>" . $user_data['tanggal_keluar'] . "</td>";
                 echo "<td>" . $user_data['perihal'] . "</td>";
-                echo "<td>" . convArr($arrayunit,$user_data['unit']) . "</td>";
-                echo "<td>" . $user_data['file_suratmasuk'] . "</td>";
-                echo "<td><a href='halaman_admin_suratmasuk_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratmasuk_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a> | <a href='../pdfsuratmasuk/$user_data[file_suratmasuk]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
+                echo "<td>" . $user_data['file_suratkeluar'] . "</td>";
+                echo "<td><a href='halaman_admin_suratkeluar_edit.php?id=$user_data[id]'><i class='bx bxs-pencil'></i></a> | <a href='../suratkeluar_delete.php?id=$user_data[id]'><i class='bx bxs-trash-alt'></i></a> | <a href='../pdfsuratkeluar/$user_data[file_suratkeluar]' target='_blank'><i class='bx bxs-image'></i></a></td></tr>";
                 ++$number;
             }
             ?>

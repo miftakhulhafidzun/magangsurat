@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="halaman_admin_suratkeluar.php" >
                     <i class='bx bx-box'></i>
                     <span class="links_name">Surat Keluar</span>
                 </a>

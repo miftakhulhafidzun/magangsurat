@@ -1,14 +1,5 @@
-<?php
-include_once("../koneksi.php");
-
-$result1 = mysqli_query($mysqli, "SELECT count(*) as totalsuratmasuk from suratmasuk;");
-$row1 = mysqli_fetch_array($result1);
-
-$result2 = mysqli_query($mysqli, "SELECT count(*) as totalsuratkeluar from suratkeluar;");
-$row2 = mysqli_fetch_array($result2);
-?>
-
-
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
 <html lang="en" dir="ltr">
 
 <head>
@@ -26,31 +17,30 @@ $row2 = mysqli_fetch_array($result2);
 
     // cek apakah yang mengakses halaman ini sudah login
     if ($_SESSION['level'] == "") {
-        header("location:index.php?pesan=gagal");
+        header("location:login/index.php?pesan=gagal");
     }
     ?>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bx-envelope'></i>
+            <i class='bx bx-book-bookmark'></i>
             <span class="logo_name">Arsip Surat</span>
         </div>
         <ul class="nav-links">
             <li>
-                <!-- SET ACTIVE UNTUK SECTION YANG ACTIVE -->
-                <a href="#" class="active">
+                <a href="halaman_admin.php" class="">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="halaman_admin_suratmasuk.php" class="">
-                    <i class='bx bx-archive-in'></i>
+                <a href="#" class="active">>
+                    <i class='bx bx-box'></i>
                     <span class="links_name">Surat Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="halaman_admin_suratkeluar.php">
-                    <i class='bx bx-paper-plane'></i>
+                    <i class='bx bx-box'></i>
                     <span class="links_name">Surat Keluar</span>
                 </a>
             </li>
@@ -66,11 +56,12 @@ $row2 = mysqli_fetch_array($result2);
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Dashboard</span>
+                <span class="dashboard">Surat Keluar</span>
             </div>
             <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
                 <i class='bx bx-search'></i>
+                
             </div> -->
             <div class="profile-details">
                 <i class="bx bx-user"></i>
@@ -79,26 +70,9 @@ $row2 = mysqli_fetch_array($result2);
         </nav>
 
         <div class="home-content">
-            <div class="overview-boxes">
-                <div class="box" style="gap: 1em">
-                    <h2>
-                        <span class="iconify" data-icon="bx:bx-archive-in" data-width="50" data-height="50"></span>
-                        <?php
-                        echo "<p style='font-weight: normal; font-size: 50px;'>" . $row1['totalsuratmasuk'] . "</p>";
-                        ?>
-                    </h2>
-                    <h1 style='font-weight: normal; font-size: 50px; color: #0a2558;'>Surat Masuk</h1>
-                </div>
-                <div class="box" style="gap: 1em">
-                    <h2>
-                        <span class="iconify" data-icon="bx:bx-paper-plane" data-width="50" data-height="50"></span>
-                        <?php
-                        echo "<p style='font-weight: normal; font-size: 50px;'>" . $row2['totalsuratkeluar'] . "</p>";
-                        ?>
-                    </h2>
-                    <h1 style='font-weight: normal; font-size: 50px; color: #0a2558;'>Surat Keluar</h1>
-                </div>
-            </div>
+            <?php
+            require '../suratmkeluar_edit.php';
+            ?>
         </div>
     </section>
 
@@ -113,7 +87,6 @@ $row2 = mysqli_fetch_array($result2);
                 sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
     </script>
-    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
 
 </body>
 
