@@ -22,7 +22,7 @@
     ?>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bx-book-bookmark'></i>
+            <i class='bx bx-envelope'></i>
             <span class="logo_name">Arsip Surat</span>
         </div>
         <ul class="nav-links">
@@ -33,14 +33,14 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="active">>
-                    <i class='bx bx-box'></i>
+                <a href="halaman_admin_suratmasuk.php" class="active">
+                    <i class='bx bx-archive-in'></i>
                     <span class="links_name">Surat Masuk</span>
                 </a>
             </li>
             <li>
-                <a href="halaman_admin_suratkeluar.php">
-                    <i class='bx bx-box'></i>
+                <a href="halaman_admin_suratkeluar.php">>
+                    <i class='bx bx-paper-plane'></i>
                     <span class="links_name">Surat Keluar</span>
                 </a>
             </li>
@@ -71,7 +71,7 @@
 
         <div class="home-content">
             <?php
-            require '../suratmkeluar_edit.php';
+            require '../suratkeluar_edit.php';
             ?>
         </div>
     </section>
